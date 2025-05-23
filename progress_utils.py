@@ -23,12 +23,11 @@ def load_completed_race_results(filename="progress.csv", count=10):
     except FileNotFoundError:
         return []
 
-    return results[-count:]
-
+    return results if count is None else results[-count:]
 
 
 def compute_user_progress_stats(filename="progress.csv"):
-    completed = load_completed_race_results(filename)
+    completed = load_completed_race_results(filename, count=None)
     races_completed = len(completed)
 
     if not completed:
